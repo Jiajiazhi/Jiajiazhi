@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../../../../home/airflow/.local/lib/python3.6/site-packages/airflow/example_dags"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

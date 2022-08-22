@@ -1,0 +1,31 @@
+USE AdventureWorks2017
+GO
+
+ALTER DATABASE AdventureWorks2017  
+SET CHANGE_TRACKING = ON  
+(CHANGE_RETENTION = 3 DAYS, AUTO_CLEANUP = ON)  
+GO
+ALTER TABLE sales.salesorderheader
+ENABLE CHANGE_TRACKING  
+WITH (TRACK_COLUMNS_UPDATED = OFF)
+GO 
+
+
+
+drop index [IX_Address_AddressLine1_AddressLine2_City_StateProvinceID_PostalCode]
+on person.address
+GO
+
+
+CREATE TABLE [dbo].[CHG_LOG_TBL](
+	[JOB_EXEC_ID] [int] IDENTITY(1,1) NOT NULL,
+	[JOB_EXEC_STATUS] [bit] NULL,
+	[DB_CHG_VERSION_ID] [bigint] NULL,
+	[JOB_START_TS] [datetime] NOT NULL default getdate(),
+	[JOB_END_TS] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[JOB_EXEC_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
